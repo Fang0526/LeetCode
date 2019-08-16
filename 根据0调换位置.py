@@ -3,7 +3,7 @@
 所有小于0的数放到0左边
 '''
 class Solution(object):
-    def sortByZero(self, lst):
+    def sortByZero(self, lst, left, right):
         """
         :type lst: list
         :rtype: lst
@@ -13,9 +13,6 @@ class Solution(object):
         mid = lst.index(0)
         # 把0和第一个数字互换以用来实行一次以0为基准数的快速排序
         lst[0],lst[mid] = lst[mid],lst[0]
-        
-        left = 1
-        right = len(lst)-1
 
         while True:
 
@@ -40,5 +37,6 @@ class Solution(object):
         
 
 solu=Solution()
-result=solu.sortByZero([2,7,-4,6,-2,0,-8,3,-1])
+lst=[2,7,-4,6,-2,0,-8,3,-1]
+result=solu.sortByZero(lst,1,len(lst)-1)
 print(result)
