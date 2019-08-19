@@ -92,7 +92,7 @@ class Solution():
             p+=1
                 
         if i<right_s:
-            temp[i-right_s:]=lst[i:right_s]
+            temp[p:]=lst[i:right_s]
         lst[left_s:right_e+1]=temp[:]
 
 solu=Solution()
