@@ -45,8 +45,8 @@ class Solution():
             position = self.PartitionHandle(lst,left,right) # 返回该轮确定位置的元素，该元素左边比它小右边比它大
             self.enQuickSort(lst,left,position-1)
             self.enQuickSort(lst,position+1,right)    
-
-    def PartitionHandle(self,lst,left,right):
+    @staticmethod
+    def PartitionHandle(lst,left,right):
         tar = lst[left]
         i=left
         while True:
@@ -60,10 +60,62 @@ class Solution():
             else:
                 lst[left],lst[right]=lst[right],lst[left]
         return right
+
+    '''
+    归并排序
+    '''
+    def MergeSort(self,lst):
+        self.enMergeSort(lst, 0, len(lst)-1)
+
+    def enMergeSort(self,lst,left,right):
+        if left>=right:
+            return
+
+        part=int((left+right)/2)
+        self.enMergeSort(lst,left,part)
+        self.enMergeSort(lst,part+1,right)
+        self.Merge(lst,left,part+1,right)
+
+    @staticmethod
+    def Merge(lst,left_s, right_s, right_e):
+        temp=lst[left_s:right_e+1]
+        p=0
+        i=left_s
+        j=right_s
+        while i<right_s and j<=right_e:
+            if lst[i]<=lst[j]:
+                temp[p]=lst[i]
+                i+=1
+            else:
+                temp[p]=lst[j]
+                j+=1
+            p+=1
                 
+        if i<right_s:
+            temp[i-right_s:]=lst[i:right_s]
+        lst[left_s:right_e+1]=temp[:]
 
 solu=Solution()
 
+lst=[5]
+solu.MergeSort(lst)
+print(lst)
+lst=[5,23]
+solu.MergeSort(lst)
+print(lst)
+lst=[23,14]
+solu.MergeSort(lst)
+print(lst)
+lst=[5,23,14,2,3,6,1,7,4]
+solu.MergeSort(lst)
+print(lst)
+lst=[5,23,14,2,3,6,1,7,34]
+solu.MergeSort(lst)
+print(lst)
+lst=[23,14,2,3,6,1,7,4]
+solu.MergeSort(lst)
+print(lst)
+'''
 lst=[5]
 solu.QuickSort(lst)
 print(lst)
@@ -73,18 +125,16 @@ print(lst)
 lst=[23,14]
 solu.QuickSort(lst)
 print(lst)
-
 lst=[5,23,14,2,3,6,1,7,4]
 solu.QuickSort(lst)
 print(lst)
-
 lst=[5,23,14,2,3,6,1,7,34]
 solu.QuickSort(lst)
 print(lst)
 lst=[23,14,2,3,6,1,7,4]
 solu.QuickSort(lst)
 print(lst)
-
+'''
 '''result=solu.maopao([2,3,6,1,7,4])
 print(result)
 result=solu.maopao([2])
