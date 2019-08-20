@@ -95,7 +95,112 @@ class Solution():
             temp[p:]=lst[i:right_s]
         lst[left_s:right_e+1]=temp[:]
 
+    '''
+    快速排序
+    '''
+    def QuickSort(self,lst):
+        self.enQuickSort(lst,0,len(lst)-1)
+
+    def enQuickSort(self,lst,left,right):
+        if left>=right:
+            return
+        
+        pivot=lst[left]
+        i,j=left,right
+        
+        while True:
+            while j>i and lst[j]>=pivot:
+                j-=1
+            while i<j and lst[i]<=pivot:
+                i+=1
+            if i>=j:
+                break
+            else:
+                lst[i],lst[j]=lst[j],lst[i]
+                
+        lst[left],lst[j]=lst[j],lst[left]
+
+        self.enQuickSort(lst,left,j-1)
+        self.enQuickSort(lst,j+1,right)
+
+    '''
+    倒数第K个
+    '''
+    def KBackWard(self,lst,k):
+        return self.enKBackWard(lst,k,0,len(lst)-1)
+
+    def enKBackWard(self,lst,k,left,right):
+        if left>right:
+            return None
+
+        pivot=lst[left]
+        i,j=left,right
+        while True:
+            while j>i and lst[j]>=pivot:
+                j-=1
+            while i<j and lst[i]<=pivot:
+                i+=1
+            if i>=j:
+                break;
+            else:
+                lst[i],lst[j]=lst[j],lst[i]
+
+        lst[left],lst[j]=lst[j],lst[left]
+
+        if j == len(lst)-k: #最大是第1大
+            return lst[j]
+        elif j<len(lst)-k:
+            return self.enKBackWard(lst,k,j+1,right)
+        else:
+            return self.enKBackWard(lst,k,left,j-1)           
+        
+
 solu=Solution()
+
+lst=[5]
+result=solu.KBackWard(lst,1)
+print(result)
+lst=[5,23]
+result=solu.KBackWard(lst,2)
+print(result)
+lst=[23,14]
+result=solu.KBackWard(lst,1)
+print(result)
+lst=[5,23,14,2,3,6,1,7,4]
+result=solu.KBackWard(lst,1)
+print(result)
+lst=[5,23,14,2,3,6,1,7,4]
+result=solu.KBackWard(lst,4)
+print(result)
+lst=[5,23,14,2,3,6,1,7,4]
+result=solu.KBackWard(lst,9)
+print(result)
+lst=[5,23,14,2,3,6,1,7,4]
+result=solu.KBackWard(lst,10)
+print(result)
+lst=[5,23,14,2,3,6,1,7,4]
+result=solu.KBackWard(lst,0)
+print(result)
+
+'''
+lst=[5]
+solu.QuickSort(lst)
+print(lst)
+lst=[5,23]
+solu.QuickSort(lst)
+print(lst)
+lst=[23,14]
+solu.QuickSort(lst)
+print(lst)
+lst=[5,23,14,2,3,6,1,7,4]
+solu.QuickSort(lst)
+print(lst)
+lst=[5,23,14,2,3,6,1,7,34]
+solu.QuickSort(lst)
+print(lst)
+lst=[23,14,2,3,6,1,7,4]
+solu.QuickSort(lst)
+print(lst)
 
 lst=[5]
 solu.MergeSort(lst)
@@ -115,7 +220,7 @@ print(lst)
 lst=[23,14,2,3,6,1,7,4]
 solu.MergeSort(lst)
 print(lst)
-'''
+
 lst=[5]
 solu.QuickSort(lst)
 print(lst)
